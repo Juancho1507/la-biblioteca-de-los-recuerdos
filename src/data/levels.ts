@@ -1,0 +1,5 @@
+import {Level, SpecialCard} from '../types';
+const rooms=['La Sala de los Aprendices','El Corredor de los Manuscritos','La Cámara de las Runas','El Archivo Prohibido','La Torre del Conocimiento','EL GRAN ARCHIVO'];
+const titles=['Umbral de los recuerdos','Luz entre estantes','El códice azul','Ecos de tinta','La bóveda celeste'];
+export const levels:Level[]=Array.from({length:30},(_,i)=>{const id=i+1;const room=id<=6?rooms[0]:id<=12?rooms[1]:id<=18?rooms[2]:id<=24?rooms[3]:id<=29?rooms[4]:rooms[5];const specialCards:SpecialCard[]=id<7?[]:id<13?['time']:id<19?['time','oracle','mirror']:id<25?['time','oracle','mirror','shadow','portal']:['time','oracle','mirror','shadow','portal','phoenix','rune'];return {id,difficulty:Math.ceil(id/6),pairs:Math.min(12,3+Math.floor((id-1)/2)),timeLimit:Math.max(42,90-id),multiplier:1+id*.05,specialCards,targetScore:500+id*260,targetMoves:Math.ceil((3+Math.floor((id-1)/2))*2.6),room,title:id===30?'El Gran Archivo':titles[(id-1)%titles.length]};});
+export const getLevel=(id:number)=>levels.find(l=>l.id===id)||levels[0];

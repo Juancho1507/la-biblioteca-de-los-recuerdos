@@ -1,0 +1,2 @@
+import {Card,Level} from '../types'; import {createCards} from '../utils/scoring';
+export class GameEngine{cards:Card[]=[];constructor(public level:Level){this.cards=createCards(level,'archive')}initializeGame(){this.cards=createCards(this.level,'archive');return this.cards}selectCard(id:string){const c=this.cards.find(x=>x.id===id);if(c&&!c.flipped&&!c.matched)c.flipped=true;return c}checkMatch(a:Card,b:Card){return a.pairId===b.pairId}resetGame(){return this.initializeGame()}}
